@@ -1,8 +1,15 @@
 {
-  "name": "automatic-file-checker",
+  "name": "@fawke/automatic-file-checker",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A cli tool to check for some file patterns",
+  "main": "src/index.js",
+  "bin": {
+    "@fawke/automatic-file-checker": "bin/afc",
+    "automatic-file-checker": "bin/afc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,11 +17,20 @@
     "type": "git",
     "url": "git+https://github.com/Fawke/automatic-file-checker.git"
   },
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "file-checker"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Fawke/automatic-file-checker/issues"
   },
-  "homepage": "https://github.com/Fawke/automatic-file-checker#readme"
+  "homepage": "https://github.com/Fawke/automatic-file-checker#readme",
+  "dependencies": {
+    "arg": "^4.1.1",
+    "esm": "^3.2.25",
+    "glob": "^7.1.4",
+    "inquirer": "^7.0.0"
+  }
 }
