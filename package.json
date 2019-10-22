@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "bin": {
     "@fawke/automatic-file-checker": "bin/afc",
-    "automatic-file-checker": "bin/afc"
+    "automatic-file-checker": "bin/afc",
+    "@fawke/afc": "bin/afc",
+    "afc": "bin/afc"
   },
   "publishConfig": {
     "access": "public"
