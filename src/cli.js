@@ -15,11 +15,12 @@ function parseArgumentsIntoOptions() {
 	const args = arg(
 		{
 			// types
-			'--dir': String,               // location of the directory where you want to run this command
-			'--pattern': String,           // the pattern that you want to search for
-			'--output-csv-location': String,        // the outpath of the generated csv file
-			'--deleted-files-location': String,    // output path of the deleted folder
-			'--hard-delete': Boolean,			 // if set to true, will delete all the files matching the pattern, if false, will keep them & move them to a temporary location
+			'--dir': String,               								// location of the directory where you want to run this command
+			'--pattern': String,           								// the pattern that you want to search for
+			'--output-csv-location': String,        			// the outpath of the generated csv file
+			'--deleted-files-location': String,    				// output path of the deleted folder
+			'--hard-delete': Boolean,			 								// if set to true, will delete all the files matching the pattern, if false, will keep them & move them to a temporary location
+			'--delete-spec': Boolean											// if set to true, will delete the corresponding spec files of the adapters that are found using old api
 		}
 	);
 	return args;
@@ -53,7 +54,16 @@ export function cli(args) {
 
 						// if hard-delete options is set to true, it'll permaneently move the files, else, it'll just copy the files.
 						// it's recommended to NOT hard-delete at first, review your files in the csv, review the deleted files, once, you're sure that the files are correctly deleted, then only do a hard delete.
+						const parentDir = file.split('/').slice(0, -2).join('/');
 						if (options['--hard-delete']) {
+							if (options['--delete-spec']) {
+								// location of the corresponding spec file for the given js file
+								// Example Location of the file
+								// ./test/spec/modules/a4gBidAdapter_spec.js
+
+								const specFileLocation = `${parentDir}/test/spec/modules/${fileName}_spec.js`;
+								moveFiles(specFileLocation, newLocation);
+							}
 							moveFiles(file, newLocation);
 						} else {
 							copyFiles(file, newLocation);
